@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Home, LayoutGrid, User, Upload, Mail, Rss } from "lucide-react";
 import { UserNav } from "@/components/auth/user-nav";
+import { cookies } from "next/headers";
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
@@ -13,6 +14,8 @@ const navLinks = [
 ];
 
 export function Header() {
+  const authToken = cookies().get('auth-token')?.value;
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
@@ -76,7 +79,18 @@ export function Header() {
             <div className="w-full flex-1 md:w-auto md:flex-none">
                 {/* Search could go here */}
             </div>
-            <UserNav />
+            {authToken ? (
+              <UserNav />
+            ) : (
+              <div className="flex items-center gap-2">
+                <Button asChild variant="ghost">
+                  <Link href="/login">Login</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/signup">Sign Up</Link>
+                </Button>
+              </div>
+            )}
         </div>
       </div>
     </header>

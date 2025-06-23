@@ -18,6 +18,7 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CircleDollarSign, LogOut, UserCircle } from "lucide-react";
 import Link from "next/link";
+import { logout } from "./actions";
 
 export function UserNav() {
   return (
@@ -62,7 +63,7 @@ export function UserNav() {
           </div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => logout()}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>
