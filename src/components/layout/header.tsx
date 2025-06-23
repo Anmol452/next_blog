@@ -1,17 +1,10 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, LayoutGrid, User, Upload, Mail, Rss } from "lucide-react";
+import { Menu, Rss } from "lucide-react";
 import { UserNav } from "@/components/auth/user-nav";
 import { cookies } from "next/headers";
-
-const navLinks = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/all-blogs", label: "All Blogs", icon: LayoutGrid },
-  { href: "/my-blogs", label: "My Blogs", icon: User },
-  { href: "/upload", label: "Upload Blog", icon: Upload },
-  { href: "/contact", label: "Contact Us", icon: Mail },
-];
+import { DesktopNav, MobileNav } from "./navigation";
 
 export function Header() {
   const authToken = cookies().get('auth-token')?.value;
@@ -26,17 +19,7 @@ export function Header() {
               BlogNest
             </span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={label}
-                href={href}
-                className="transition-colors hover:text-foreground/80 text-foreground/60"
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
+          <DesktopNav />
         </div>
 
         <Sheet>
@@ -59,18 +42,7 @@ export function Header() {
               <span className="font-bold font-headline">BlogNest</span>
             </Link>
             <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-              <div className="flex flex-col space-y-3">
-              {navLinks.map(({ href, label, icon: Icon }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    className="flex items-center text-muted-foreground hover:text-foreground"
-                  >
-                    <Icon className="mr-2 h-4 w-4" />
-                    {label}
-                  </Link>
-                ))}
-              </div>
+              <MobileNav />
             </div>
           </SheetContent>
         </Sheet>
