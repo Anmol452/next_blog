@@ -15,7 +15,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     <article className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
         <header className="mb-8">
-          <Badge variant="secondary" className="mb-4">Category</Badge>
+          <Badge variant="secondary" className="mb-4">{post.category}</Badge>
           <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground sm:text-5xl">
             {post.title}
           </h1>

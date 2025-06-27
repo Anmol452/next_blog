@@ -12,6 +12,7 @@ export default function EditPostPage({ params }: { params: { slug: string } }) {
   const postForForm = {
     title: post.title,
     description: post.description,
+    category: post.category,
     subsections: post.subsections.map(s => ({ title: s.title, description: s.description })),
     images: [], // File inputs can't be pre-filled
   }

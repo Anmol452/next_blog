@@ -11,6 +11,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PlusCircle, Image as ImageIcon, Trash2, FileText } from "lucide-react";
 import { TitleSuggester } from "./title-suggester";
 import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const MAX_IMAGES = 3;
 const MAX_SUBSECTIONS = 3;
@@ -18,6 +25,7 @@ const MAX_SUBSECTIONS = 3;
 const formSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters.").max(70, "Title must be 70 characters or less for SEO."),
   description: z.string().min(20, "Description is too short."),
+  category: z.string().min(1, "Please select a category."),
   images: z.array(z.any()).max(MAX_IMAGES),
   subsections: z.array(z.object({
     title: z.string().min(5, "Subtitle is too short."),
@@ -31,6 +39,8 @@ interface UploadFormProps {
   post?: UploadFormValues;
 }
 
+const categories = ["Technology", "Web Development", "Design", "SEO", "Productivity", "Lifestyle"];
+
 export function UploadForm({ post }: UploadFormProps) {
   const [titleCharCount, setTitleCharCount] = useState(post?.title.length || 0);
 
@@ -39,6 +49,7 @@ export function UploadForm({ post }: UploadFormProps) {
     defaultValues: post || {
       title: "",
       description: "",
+      category: "",
       images: [],
       subsections: [],
     },
@@ -99,6 +110,27 @@ export function UploadForm({ post }: UploadFormProps) {
               render={({ field }) => <Textarea {...field} placeholder="Describe your blog post..." className="min-h-[150px]" />}
             />
             {form.formState.errors.description && <p className="text-sm text-destructive">{form.formState.errors.description.message}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="category" className="text-lg font-semibold">Category</Label>
+            <Controller
+              name="category"
+              control={form.control}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <SelectTrigger id="category">
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map(category => (
+                      <SelectItem key={category} value={category}>{category}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {form.formState.errors.category && <p className="text-sm text-destructive">{form.formState.errors.category.message}</p>}
           </div>
 
           <div className="space-y-4">
