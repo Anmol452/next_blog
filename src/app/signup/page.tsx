@@ -140,7 +140,7 @@ export default function SignupPage() {
               </div>
                <div className="grid gap-2">
                 <Label htmlFor="otp">Verification Code (OTP)</Label>
-                <Input id="otp" name="otp" required placeholder="123456"/>
+                <Input id="otp" name="otp" required placeholder="2233"/>
               </div>
               <SubmitButton />
             </form>

@@ -32,7 +32,7 @@ export async function signupAction(prevState: { error: string } | null, formData
   
   // For demo purposes, we are using a hardcoded OTP.
   // In a real app, you would verify this against a value stored in your database/session.
-  if (otp !== '123456') {
+  if (otp !== '2233') {
       return { error: 'Invalid OTP. Please try again.' };
   }
   

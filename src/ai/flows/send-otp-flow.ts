@@ -17,7 +17,7 @@ export type SendOtpInput = z.infer<typeof SendOtpInputSchema>;
 
 const SendOtpOutputSchema = z.object({
   message: z.string().describe('A confirmation message for the user.'),
-  otp: z.string().describe('The 6-digit OTP code. In a real app, this would not be returned.'),
+  otp: z.string().describe('The 4-digit OTP code. In a real app, this would not be returned.'),
 });
 export type SendOtpOutput = z.infer<typeof SendOtpOutputSchema>;
 
@@ -35,7 +35,7 @@ const sendOtpFlow = ai.defineFlow(
     // In a real application, you would generate a random OTP, store it,
     // and use a service to send an email.
     // For this demo, we'll use a fixed OTP and return it directly.
-    const otp = '123456';
+    const otp = '2233';
 
     const prompt = ai.definePrompt({
       name: 'sendOtpPrompt',
