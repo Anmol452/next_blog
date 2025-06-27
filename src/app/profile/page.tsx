@@ -1,46 +1,110 @@
+
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { blogPosts } from "@/lib/mock-data";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function ProfilePage() {
+    const myPosts = blogPosts.filter((post) => post.author === "Jane Doe");
+
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold font-headline tracking-tight sm:text-5xl mb-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold font-headline tracking-tight sm:text-5xl mb-8 text-center">
           User Profile
         </h1>
         <Card>
           <CardHeader className="flex flex-col items-center text-center">
-            <Avatar className="h-24 w-24 mb-4">
-              <AvatarImage src="https://placehold.co/100x100.png" alt="User" data-ai-hint="user avatar" />
-              <AvatarFallback>U</AvatarFallback>
-            </Avatar>
+             <Dialog>
+              <DialogTrigger asChild>
+                <Avatar className="h-24 w-24 mb-4 cursor-pointer transition-transform hover:scale-110">
+                  <AvatarImage src="https://placehold.co/100x100.png" alt="User" data-ai-hint="user avatar" />
+                  <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
+              </DialogTrigger>
+              <DialogContent className="p-0 bg-transparent border-0 w-auto flex justify-center">
+                <Image src="https://placehold.co/400x400.png" alt="User" width={400} height={400} className="rounded-full" data-ai-hint="user avatar" />
+              </DialogContent>
+            </Dialog>
+
             <Button variant="outline" size="sm">Change Photo</Button>
-            <CardTitle className="mt-4">User Name</CardTitle>
+            <CardTitle className="mt-4">Jane Doe</CardTitle>
             <CardDescription>Joined on {new Date().toLocaleDateString()}</CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-6">
+            <div className="flex justify-center gap-8 my-6 text-center">
+                <div>
+                    <p className="text-2xl font-bold">1.2K</p>
+                    <p className="text-sm text-muted-foreground">Followers</p>
+                </div>
+                 <div>
+                    <p className="text-2xl font-bold">150</p>
+                    <p className="text-sm text-muted-foreground">Following</p>
+                </div>
+            </div>
+            <form className="space-y-6 max-w-md mx-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
-                  <Input id="name" defaultValue="User Name" />
+                  <Input id="name" defaultValue="Jane Doe" />
                 </div>
                  <div className="space-y-2">
                   <Label htmlFor="username">Username</Label>
-                  <Input id="username" defaultValue="username" />
+                  <Input id="username" defaultValue="janedoe" />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="email" defaultValue="user@example.com" disabled />
               </div>
-              <Button type="submit" className="w-full sm:w-auto">Save Changes</Button>
+              <div className="text-center">
+                <Button type="submit" className="w-full sm:w-auto">Save Changes</Button>
+              </div>
             </form>
           </CardContent>
         </Card>
+
+        <div className="mt-12">
+            <h2 className="text-3xl font-bold font-headline mb-6">Uploaded Blogs</h2>
+            {myPosts.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {myPosts.map((post) => (
+                        <Card key={post.id} className="overflow-hidden group">
+                             <Link href={`/blog/${post.slug}`}>
+                                <Image
+                                    src={post.postImage}
+                                    alt={post.title}
+                                    width={400}
+                                    height={250}
+                                    className="w-full h-40 object-cover transition-transform group-hover:scale-105"
+                                />
+                            </Link>
+                            <CardHeader>
+                                <CardTitle className="text-lg leading-snug">
+                                    <Link href={`/blog/${post.slug}`} className="hover:text-primary transition-colors">
+                                        {post.title}
+                                    </Link>
+                                </CardTitle>
+                                <CardDescription className="text-xs pt-1">{post.date}</CardDescription>
+                            </CardHeader>
+                        </Card>
+                    ))}
+                </div>
+            ) : (
+                <p className="text-center text-muted-foreground">No blogs uploaded yet.</p>
+            )}
+        </div>
       </div>
     </div>
   );
