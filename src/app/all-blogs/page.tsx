@@ -14,14 +14,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { blogPosts } from "@/lib/mock-data";
 import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function AllBlogsPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const categories = ["All", ...Array.from(new Set(blogPosts.map((post) => post.category)))];
 
   const filteredBlogPosts = blogPosts.filter(
     (post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.description.toLowerCase().includes(searchTerm.toLowerCase())
+      (selectedCategory === "All" || post.category === selectedCategory) &&
+      (post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -35,7 +40,19 @@ export default function AllBlogsPage() {
         </p>
       </div>
 
-      <div className="mt-8 mb-12 max-w-lg mx-auto">
+      <div className="flex justify-center flex-wrap gap-2 my-8">
+        {categories.map((category) => (
+          <Button
+            key={category}
+            variant={selectedCategory === category ? "default" : "outline"}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </Button>
+        ))}
+      </div>
+
+      <div className="mb-12 max-w-lg mx-auto">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
@@ -97,7 +114,7 @@ export default function AllBlogsPage() {
         </div>
       ) : (
         <div className="text-center py-16">
-            <p className="text-muted-foreground">No blogs found for &quot;{searchTerm}&quot;.</p>
+            <p className="text-muted-foreground">No blogs found for the selected filters.</p>
         </div>
       )}
     </div>
