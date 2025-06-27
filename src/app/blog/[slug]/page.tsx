@@ -3,6 +3,7 @@ import Image from "next/image";
 import { blogPosts } from "@/lib/mock-data";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { FollowButton } from "@/components/follow-button";
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find((p) => p.slug === params.slug);
@@ -19,15 +20,18 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground sm:text-5xl">
             {post.title}
           </h1>
-          <div className="mt-6 flex items-center gap-x-4">
-            <Avatar>
-              <AvatarImage src={post.authorImage} alt={post.author} />
-              <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="font-semibold text-foreground">{post.author}</p>
-              <p className="text-muted-foreground">{post.date}</p>
+          <div className="mt-6 flex items-center justify-between gap-x-4">
+            <div className="flex items-center gap-x-4">
+              <Avatar>
+                <AvatarImage src={post.authorImage} alt={post.author} />
+                <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="font-semibold text-foreground">{post.author}</p>
+                <p className="text-muted-foreground">{post.date}</p>
+              </div>
             </div>
+            <FollowButton />
           </div>
         </header>
 
