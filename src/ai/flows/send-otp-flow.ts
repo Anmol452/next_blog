@@ -25,6 +25,14 @@ export async function sendOtp(input: SendOtpInput): Promise<SendOtpOutput> {
   return sendOtpFlow(input);
 }
 
+const sendOtpPrompt = ai.definePrompt({
+  name: 'sendOtpPrompt',
+  input: {schema: z.object({ email: z.string(), otp: z.string() })},
+  output: {schema: z.object({ message: z.string() })},
+  prompt: `You are an authentication system. A user with email {{{email}}} has requested an OTP. The code is {{{otp}}}.
+      Craft a simple, friendly message confirming that the OTP has been sent. Mention that it's for signing up to BlogNest.`,
+});
+
 const sendOtpFlow = ai.defineFlow(
   {
     name: 'sendOtpFlow',
@@ -37,15 +45,7 @@ const sendOtpFlow = ai.defineFlow(
     // For this demo, we'll use a fixed OTP and return it directly.
     const otp = '2233';
 
-    const prompt = ai.definePrompt({
-      name: 'sendOtpPrompt',
-      input: {schema: z.object({ email: z.string(), otp: z.string() })},
-      output: {schema: z.object({ message: z.string() })},
-      prompt: `You are an authentication system. A user with email {{{email}}} has requested an OTP. The code is {{{otp}}}.
-      Craft a simple, friendly message confirming that the OTP has been sent. Mention that it's for signing up to BlogNest.`,
-    });
-
-    const { output } = await prompt({email: input.email, otp});
+    const { output } = await sendOtpPrompt({email: input.email, otp});
 
     // We append the OTP to the output for testing purposes.
     return {
