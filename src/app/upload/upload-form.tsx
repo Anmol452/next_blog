@@ -27,12 +27,16 @@ const formSchema = z.object({
 
 type UploadFormValues = z.infer<typeof formSchema>;
 
-export function UploadForm() {
-  const [titleCharCount, setTitleCharCount] = useState(0);
+interface UploadFormProps {
+  post?: UploadFormValues;
+}
+
+export function UploadForm({ post }: UploadFormProps) {
+  const [titleCharCount, setTitleCharCount] = useState(post?.title.length || 0);
 
   const form = useForm<UploadFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: post || {
       title: "",
       description: "",
       images: [],
@@ -81,8 +85,8 @@ export function UploadForm() {
                 }} />
               )}
             />
-             <p className={`text-sm ${titleCharCount > 60 ? 'text-destructive' : 'text-muted-foreground'}`}>
-                {titleCharCount} / 70 characters (recommended: under 60)
+             <p className={`text-sm ${titleCharCount > 70 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                {titleCharCount} / 70 characters
             </p>
             {form.formState.errors.title && <p className="text-sm text-destructive">{form.formState.errors.title.message}</p>}
           </div>
@@ -158,7 +162,7 @@ export function UploadForm() {
           </div>
 
           <div className="flex justify-end">
-            <Button type="submit" size="lg">Publish Post</Button>
+            <Button type="submit" size="lg">{post ? 'Update Post' : 'Publish Post'}</Button>
           </div>
         </form>
       </CardContent>

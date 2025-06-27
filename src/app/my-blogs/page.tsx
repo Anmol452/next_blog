@@ -58,8 +58,10 @@ export default function MyBlogsPage() {
               </p>
             </CardContent>
             <div className="p-6 pt-0 flex justify-end gap-2">
-               <Button variant="outline" size="sm">
-                 <Edit className="mr-2 h-4 w-4" /> Edit
+               <Button variant="outline" size="sm" asChild>
+                 <Link href={`/my-blogs/edit/${post.slug}`}>
+                    <Edit className="mr-2 h-4 w-4" /> Edit
+                 </Link>
                </Button>
                <Button variant="destructive" size="sm">
                  <Trash className="mr-2 h-4 w-4" /> Delete
