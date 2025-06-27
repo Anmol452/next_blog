@@ -8,6 +8,7 @@ import { DesktopNav, MobileNav } from "./navigation";
 
 export function Header() {
   const authToken = cookies().get('auth-token')?.value;
+  const isAuthenticated = !!authToken;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -19,7 +20,7 @@ export function Header() {
               BlogNest
             </span>
           </Link>
-          <DesktopNav />
+          <DesktopNav isAuthenticated={isAuthenticated} />
         </div>
 
         <Sheet>
@@ -42,7 +43,7 @@ export function Header() {
               <span className="font-bold font-headline">BlogNest</span>
             </Link>
             <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-              <MobileNav />
+              <MobileNav isAuthenticated={isAuthenticated} />
             </div>
           </SheetContent>
         </Sheet>
@@ -50,7 +51,7 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end space-x-2">
             <div className="w-full flex-1 md:w-auto md:flex-none">
             </div>
-            {authToken ? (
+            {isAuthenticated ? (
               <UserNav />
             ) : (
               <div className="flex items-center gap-2">

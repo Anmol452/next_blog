@@ -5,16 +5,18 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Home, LayoutGrid, User, Upload, Mail } from 'lucide-react';
 
-const navLinks = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/all-blogs', label: 'All Blogs', icon: LayoutGrid },
-  { href: '/my-blogs', label: 'My Blogs', icon: User },
-  { href: '/upload', label: 'Upload Blog', icon: Upload },
-  { href: '/contact', label: 'Contact Us', icon: Mail },
+const allLinks = [
+  { href: '/', label: 'Home', icon: Home, auth: false },
+  { href: '/all-blogs', label: 'All Blogs', icon: LayoutGrid, auth: false },
+  { href: '/my-blogs', label: 'My Blogs', icon: User, auth: true },
+  { href: '/upload', label: 'Upload Blog', icon: Upload, auth: true },
+  { href: '/contact', label: 'Contact Us', icon: Mail, auth: false },
 ];
 
-export function DesktopNav() {
+export function DesktopNav({ isAuthenticated }: { isAuthenticated: boolean }) {
   const pathname = usePathname();
+  const navLinks = allLinks.filter(link => !link.auth || isAuthenticated);
+
   return (
     <nav className="flex items-center space-x-6 text-sm font-medium">
       {navLinks.map(({ href, label }) => (
@@ -33,8 +35,10 @@ export function DesktopNav() {
   );
 }
 
-export function MobileNav() {
+export function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
   const pathname = usePathname();
+  const navLinks = allLinks.filter(link => !link.auth || isAuthenticated);
+
   return (
     <div className="flex flex-col space-y-3">
       {navLinks.map(({ href, label, icon: Icon }) => (
