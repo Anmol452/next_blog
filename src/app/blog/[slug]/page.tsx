@@ -4,6 +4,7 @@ import { blogPosts } from "@/lib/mock-data";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { FollowButton } from "@/components/follow-button";
+import { Eye, Users } from "lucide-react";
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find((p) => p.slug === params.slug);
@@ -16,7 +17,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     <article className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
         <header className="mb-8">
-          <Badge variant="secondary" className="mb-4">{post.category}</Badge>
+          <div className="flex justify-between items-center mb-4">
+            <Badge variant="secondary">{post.category}</Badge>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Eye className="h-5 w-5" />
+              <span>{post.views.toLocaleString()} views</span>
+            </div>
+          </div>
+
           <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground sm:text-5xl">
             {post.title}
           </h1>
@@ -28,7 +36,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               </Avatar>
               <div>
                 <p className="font-semibold text-foreground">{post.author}</p>
-                <p className="text-muted-foreground">{post.date}</p>
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <span>{post.date}</span>
+                    <span className="flex items-center gap-1">
+                        <Users className="h-4 w-4" />
+                        {post.followers.toLocaleString()} followers
+                    </span>
+                </div>
               </div>
             </div>
             <FollowButton />

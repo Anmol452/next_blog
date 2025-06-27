@@ -9,6 +9,8 @@ export const blogPosts = [
     postImage: "https://placehold.co/600x400.png",
     date: "October 26, 2023",
     category: "Web Development",
+    views: 25700,
+    followers: 1200,
     content: `
       <p>React Hooks are functions that let you “hook into” React state and lifecycle features from function components. Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class.</p>
       <h2>Why Hooks?</h2>
@@ -53,6 +55,8 @@ function Example() {
     postImage: "https://placehold.co/600x400.png",
     date: "October 22, 2023",
     category: "Design",
+    views: 18300,
+    followers: 850,
     content: "<p>Content for CSS Grid post.</p>",
     subsections: []
   },
@@ -66,6 +70,8 @@ function Example() {
     postImage: "https://placehold.co/600x400.png",
     date: "October 18, 2023",
     category: "JavaScript",
+    views: 31200,
+    followers: 2500,
     content: "<p>Content for Async JS post.</p>",
     subsections: []
   },
@@ -79,6 +85,8 @@ function Example() {
     postImage: "https://placehold.co/600x400.png",
     date: "October 15, 2023",
     category: "Design",
+    views: 9800,
+    followers: 450,
     content: "<p>Content for Web Design post.</p>",
     subsections: []
   },
@@ -92,6 +100,8 @@ function Example() {
     postImage: "https://placehold.co/600x400.png",
     date: "October 11, 2023",
     category: "Web Development",
+    views: 45000,
+    followers: 1200,
     content: "<p>Content for Next.js app post.</p>",
     subsections: []
   },
@@ -105,6 +115,8 @@ function Example() {
     postImage: "https://placehold.co/600x400.png",
     date: "October 07, 2023",
     category: "SEO",
+    views: 15200,
+    followers: 780,
     content: "<p>Content for SEO post.</p>",
     subsections: []
   }
