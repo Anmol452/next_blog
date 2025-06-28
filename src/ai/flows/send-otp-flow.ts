@@ -47,9 +47,13 @@ const sendOtpFlow = ai.defineFlow(
 
     const { output } = await sendOtpPrompt({email: input.email, otp});
 
+    if (!output) {
+      throw new Error('AI generation failed or returned an invalid structure.');
+    }
+
     // We append the OTP to the output for testing purposes.
     return {
-      message: output!.message,
+      message: output.message,
       otp,
     };
   }
