@@ -152,50 +152,65 @@ export default function AllBlogsPage() {
 
       {filteredBlogPosts.length > 0 ? (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredBlogPosts.map((post) => (
-            <Card
-              key={post.id}
-              className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
-            >
-              <CardHeader className="p-0">
-                <Link href={`/blog/${post.slug}`} className="block">
-                  <Image
-                    src={post.postImage}
-                    alt={post.title}
-                    width={600}
-                    height={400}
-                    className="h-48 w-full object-cover"
-                    data-ai-hint="technology abstract"
-                  />
-                </Link>
-              </CardHeader>
-              <CardContent className="flex-grow p-6">
-                <CardTitle className="text-lg font-bold leading-6 font-headline">
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="hover:text-primary transition-colors"
-                  >
-                    {post.title}
+          {filteredBlogPosts.reduce((acc, post, index) => {
+            acc.push(
+              <Card
+                key={post.id}
+                className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+              >
+                <CardHeader className="p-0">
+                  <Link href={`/blog/${post.slug}`} className="block">
+                    <Image
+                      src={post.postImage}
+                      alt={post.title}
+                      width={600}
+                      height={400}
+                      className="h-48 w-full object-cover"
+                      data-ai-hint="technology abstract"
+                    />
                   </Link>
-                </CardTitle>
-                <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                  {post.description}
-                </p>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <div className="flex items-center gap-x-3">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src={post.authorImage} alt={post.author} />
-                    <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div className="text-sm">
-                    <p className="font-semibold text-foreground">{post.author}</p>
-                    <p className="text-xs text-muted-foreground">{post.date}</p>
+                </CardHeader>
+                <CardContent className="flex-grow p-6">
+                  <CardTitle className="text-lg font-bold leading-6 font-headline">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {post.title}
+                    </Link>
+                  </CardTitle>
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                    {post.description}
+                  </p>
+                </CardContent>
+                <CardFooter className="p-6 pt-0">
+                  <div className="flex items-center gap-x-3">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={post.authorImage} alt={post.author} />
+                      <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div className="text-sm">
+                      <p className="font-semibold text-foreground">{post.author}</p>
+                      <p className="text-xs text-muted-foreground">{post.date}</p>
+                    </div>
                   </div>
+                </CardFooter>
+              </Card>
+            );
+
+            if ((index + 1) % 10 === 0 && (index + 1) < filteredBlogPosts.length) {
+              acc.push(
+                <div
+                  key={`ad-${index}`}
+                  className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 my-4 h-40 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground"
+                >
+                  [ Google Ad Placeholder ]
                 </div>
-              </CardFooter>
-            </Card>
-          ))}
+              );
+            }
+
+            return acc;
+          }, [] as JSX.Element[])}
         </div>
       ) : (
         <div className="text-center py-16">
