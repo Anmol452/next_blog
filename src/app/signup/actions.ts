@@ -40,5 +40,5 @@ export async function signupAction(prevState: { error: string } | null, formData
   console.log('Signing up user:', { name, username, email });
 
   // On successful signup, redirect to login page.
-  redirect('/login');
+  redirect('/login?new_user=true');
 }

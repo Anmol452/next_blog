@@ -1,12 +1,13 @@
 
 "use client";
 
+import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { blogPosts } from "@/lib/mock-data";
+import { getAllBlogPosts, type AppBlogPost } from "@/lib/services/blog-service";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -16,7 +17,15 @@ import {
 } from "@/components/ui/dialog";
 
 export default function ProfilePage() {
-    const myPosts = blogPosts.filter((post) => post.author === "Jane Doe");
+    const [myPosts, setMyPosts] = useState<AppBlogPost[]>([]);
+
+    useEffect(() => {
+      const fetchPosts = async () => {
+        const allPosts = await getAllBlogPosts();
+        setMyPosts(allPosts.filter((post) => post.author === "Jane Doe"));
+      };
+      fetchPosts();
+    }, []);
 
   return (
     <div className="container mx-auto px-4 py-12">

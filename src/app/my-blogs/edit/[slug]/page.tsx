@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import { blogPosts } from "@/lib/mock-data";
+import { getBlogPostBySlug } from "@/lib/services/blog-service";
 import { UploadForm } from "@/app/upload/upload-form";
 
-export default function EditPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function EditPostPage({ params }: { params: { slug: string } }) {
+  const post = await getBlogPostBySlug(params.slug);
 
   if (!post) {
     notFound();

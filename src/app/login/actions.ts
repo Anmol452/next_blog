@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 export async function login(prevState: { error: string } | null, formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
+  const isNewUser = formData.get('new_user') === 'true';
 
   // Dummy authentication
   if (email === 'user@example.com' && password === 'password') {
@@ -15,7 +16,12 @@ export async function login(prevState: { error: string } | null, formData: FormD
       maxAge: 60 * 60 * 24 * 7, // One week
       path: '/',
     });
-    redirect('/my-blogs');
+    
+    if (isNewUser) {
+      redirect('/?welcome=true');
+    } else {
+      redirect('/my-blogs');
+    }
   } else {
     return { error: 'Invalid email or password' };
   }

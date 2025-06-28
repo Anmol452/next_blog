@@ -4,11 +4,16 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { blogPosts } from '@/lib/mock-data';
+import { getAllBlogPosts } from '@/lib/services/blog-service';
+import { WelcomeDialog } from '@/components/welcome-dialog';
 
-export default function Home() {
+export default async function Home({ searchParams }: { searchParams?: { welcome?: string } }) {
+  const blogPosts = await getAllBlogPosts();
+  const showWelcome = searchParams?.welcome === 'true';
+  
   return (
     <div className="container mx-auto px-4 py-8">
+      {showWelcome && <WelcomeDialog show={true} />}
       <section className="text-center my-12">
         <h1 className="text-5xl font-bold font-headline tracking-tight text-foreground sm:text-6xl md:text-7xl">
           Write, Share, <span className="text-primary">Earn.</span>

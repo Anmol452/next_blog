@@ -8,12 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { blogPosts } from "@/lib/mock-data";
+import { getAllBlogPosts } from "@/lib/services/blog-service";
 import { Edit, Trash, PlusCircle } from "lucide-react";
 
-export default function MyBlogsPage() {
+export default async function MyBlogsPage() {
+  const allPosts = await getAllBlogPosts();
   // Filtering for a specific author to simulate a logged-in user
-  const myPosts = blogPosts.filter((post) => post.author === "Jane Doe");
+  const myPosts = allPosts.filter((post) => post.author === "Jane Doe");
 
   return (
     <div className="container mx-auto px-4 py-12">

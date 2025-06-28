@@ -1,7 +1,9 @@
 import { MongoClient } from 'mongodb'
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
+const MONGODB_PLACEHOLDER = 'YOUR_MONGODB_URI_HERE';
+
+if (!process.env.MONGODB_URI || process.env.MONGODB_URI === MONGODB_PLACEHOLDER) {
+  throw new Error('ERROR: Please open the .env file and add your MongoDB connection string to the MONGODB_URI variable.')
 }
 
 const uri = process.env.MONGODB_URI

@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { blogPosts } from "@/lib/mock-data";
+import { getBlogPostBySlug } from "@/lib/services/blog-service";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { FollowButton } from "@/components/follow-button";
 import { Eye, Users } from "lucide-react";
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getBlogPostBySlug(params.slug);
 
   if (!post) {
     notFound();

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,13 +12,22 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { blogPosts } from "@/lib/mock-data";
+import { getAllBlogPosts, type AppBlogPost } from "@/lib/services/blog-service";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function AllBlogsPage() {
+  const [blogPosts, setBlogPosts] = useState<AppBlogPost[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const posts = await getAllBlogPosts();
+      setBlogPosts(posts);
+    };
+    fetchPosts();
+  }, []);
 
   const categories = ["All", ...Array.from(new Set(blogPosts.map((post) => post.category)))];
 
