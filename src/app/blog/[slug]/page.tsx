@@ -9,6 +9,8 @@ import { CommentsSection } from "@/components/comments-section";
 import { BlogActionsMenu } from "@/components/blog-actions-menu";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getBlogPostBySlug(params.slug);
   const authToken = cookies().get('auth-token')?.value;
