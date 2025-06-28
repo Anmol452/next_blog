@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Banknote, Wallet } from "lucide-react";
 
 export default function WithdrawPage() {
-  const availableBalance = 141.60;
+  const availableBalance = 11800;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -26,12 +26,12 @@ export default function WithdrawPage() {
                     <Wallet className="h-5 w-5 text-muted-foreground"/>
                     <span className="text-muted-foreground">Available Balance:</span>
                 </div>
-                <span className="font-bold text-lg">${availableBalance.toFixed(2)}</span>
+                <span className="font-bold text-lg">₹{availableBalance.toLocaleString('en-IN')}</span>
             </div>
             <form className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="amount">Amount (USD)</Label>
-                <Input id="amount" type="number" placeholder="e.g., 50.00" step="0.01" />
+                <Label htmlFor="amount">Amount (INR)</Label>
+                <Input id="amount" type="number" placeholder="e.g., 5000.00" step="0.01" />
               </div>
                <div className="space-y-2">
                 <Label htmlFor="bank-account">Bank Account</Label>

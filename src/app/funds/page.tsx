@@ -5,11 +5,13 @@ import { CircleDollarSign } from "lucide-react";
 import Link from "next/link";
 
 const revenueData = [
-  { month: "October 2023", views: "10,500", revenue: "$42.00", status: "Paid" },
-  { month: "September 2023", views: "8,200", revenue: "$32.80", status: "Paid" },
-  { month: "August 2023", views: "9,100", revenue: "$36.40", status: "Paid" },
-  { month: "July 2023", views: "7,600", revenue: "$30.40", status: "Paid" },
+  { month: "October 2023", views: "10,500", revenue: "₹3,500", status: "Paid" },
+  { month: "September 2023", views: "8,200", revenue: "₹2,730", status: "Paid" },
+  { month: "August 2023", views: "9,100", revenue: "₹3,030", status: "Paid" },
+  { month: "July 2023", views: "7,600", revenue: "₹2,540", status: "Paid" },
 ];
+
+const totalEarned = revenueData.reduce((acc, row) => acc + parseFloat(row.revenue.replace(/[^0-9.-]+/g,"")), 0);
 
 export default function FundsPage() {
   return (
@@ -31,7 +33,7 @@ export default function FundsPage() {
           <CardContent className="flex items-baseline gap-4">
             <div>
               <p className="text-sm text-muted-foreground">Total Earned</p>
-              <p className="text-4xl font-bold">$141.60</p>
+              <p className="text-4xl font-bold">₹{totalEarned.toLocaleString('en-IN')}</p>
             </div>
             <div className="ml-auto">
               <Button asChild>
