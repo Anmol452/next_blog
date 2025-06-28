@@ -59,51 +59,53 @@ export function WelcomeDialog({ show }: WelcomeDialogProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="flex-1 -mx-6">
-          <div className="space-y-4 py-4 px-6">
-              <div className="flex items-start gap-4">
-                <Hand className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold">Your Consent</h4>
-                  <p className="text-sm text-muted-foreground">You grant us permission to host, display, and distribute the content you create.</p>
+        <div className="flex-1 flex flex-col min-h-0 -mx-6">
+          <ScrollArea className="flex-1 min-h-0">
+              <div className="space-y-4 py-4 px-6">
+                <div className="flex items-start gap-4">
+                  <Hand className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold">Your Consent</h4>
+                    <p className="text-sm text-muted-foreground">You grant us permission to host, display, and distribute the content you create.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Gem className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold">Fund Sharing</h4>
+                    <p className="text-sm text-muted-foreground">You will receive 40% of the ad revenue generated from your blog posts.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <ShieldAlert className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold">Copyright Policy</h4>
+                    <p className="text-sm text-muted-foreground">Uploading content you don't own the rights to is strictly prohibited and will lead to account suspension.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <FileText className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold">Full Terms</h4>
+                    <p className="text-sm text-muted-foreground">
+                      For complete details, please read our full <Link href="/terms" className="underline hover:text-primary">Terms of Service</Link>.
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <Gem className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold">Fund Sharing</h4>
-                  <p className="text-sm text-muted-foreground">You will receive 40% of the ad revenue generated from your blog posts.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <ShieldAlert className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold">Copyright Policy</h4>
-                  <p className="text-sm text-muted-foreground">Uploading content you don't own the rights to is strictly prohibited and will lead to account suspension.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <FileText className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold">Full Terms</h4>
-                  <p className="text-sm text-muted-foreground">
-                    For complete details, please read our full <Link href="/terms" className="underline hover:text-primary">Terms of Service</Link>.
-                  </p>
-                </div>
-              </div>
-            </div>
-        </ScrollArea>
+          </ScrollArea>
+        </div>
         
-        <DialogFooter className="pt-4 border-t">
+        <DialogFooter className="pt-4 border-t flex-col-reverse sm:flex-col-reverse gap-2 w-full">
+          <Button type="button" onClick={handleContinue} disabled={!isAgreed} className="w-full">
+            Continue to BlogNest
+          </Button>
           <div className="flex items-center space-x-2">
             <Checkbox id="terms" checked={isAgreed} onCheckedChange={(checked) => setIsAgreed(checked as boolean)} />
             <Label htmlFor="terms" className="text-sm font-normal">
               I have read and agree to the terms and conditions.
             </Label>
           </div>
-          <Button type="button" onClick={handleContinue} disabled={!isAgreed} className="w-full">
-            Continue to BlogNest
-          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
