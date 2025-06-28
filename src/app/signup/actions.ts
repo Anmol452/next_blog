@@ -2,6 +2,7 @@
 
 import { sendOtp, SendOtpInput } from '@/ai/flows/send-otp-flow';
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 export async function sendOtpAction(email: string): Promise<{ success: boolean, message: string, otp?: string, error?: string }> {
   if (!email) {
@@ -39,6 +40,14 @@ export async function signupAction(prevState: { error: string } | null, formData
   // Dummy signup logic
   console.log('Signing up user:', { name, username, email });
 
-  // On successful signup, redirect to login page.
-  redirect('/login?new_user=true');
+  // Log the user in automatically after signup
+  cookies().set('auth-token', 'dummy-auth-token-for-demo', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 24 * 7, // One week
+    path: '/',
+  });
+
+  // On successful signup, redirect to home page with welcome popup.
+  redirect('/?welcome=true');
 }

@@ -14,9 +14,8 @@ import { Label } from "@/components/ui/label";
 import { Rss, Eye, EyeOff } from "lucide-react";
 import { login } from "./actions";
 import { useFormState, useFormStatus } from "react-dom";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { useSearchParams } from "next/navigation";
 
 function LoginButton() {
   const { pending } = useFormStatus();
@@ -27,12 +26,10 @@ function LoginButton() {
   );
 }
 
-function LoginPageContent() {
+export default function LoginPage() {
   const [state, formAction] = useFormState(login, null);
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
-  const searchParams = useSearchParams();
-  const isNewUser = searchParams.get("new_user") === "true";
 
   useEffect(() => {
     if (state?.error) {
@@ -60,7 +57,6 @@ function LoginPageContent() {
         </CardHeader>
         <CardContent>
           <form action={formAction}>
-            {isNewUser && <input type="hidden" name="new_user" value="true" />}
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -118,13 +114,5 @@ function LoginPageContent() {
         </CardContent>
       </Card>
     </div>
-  );
-}
-
-export default function LoginPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LoginPageContent />
-    </Suspense>
   );
 }
