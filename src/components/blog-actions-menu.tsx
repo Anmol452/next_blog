@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -19,16 +19,41 @@ interface BlogActionsMenuProps {
   };
 }
 
+const SAVED_POSTS_KEY = 'blagnager_saved_posts';
+
 export function BlogActionsMenu({ post }: BlogActionsMenuProps) {
   const [isSaved, setIsSaved] = useState(false);
   const { toast } = useToast();
 
+  useEffect(() => {
+    // Check if the post is already saved when the component mounts
+    const savedSlugs: string[] = JSON.parse(localStorage.getItem(SAVED_POSTS_KEY) || '[]');
+    setIsSaved(savedSlugs.includes(post.slug));
+  }, [post.slug]);
+
+
   const handleSave = () => {
-    setIsSaved(!isSaved);
-    toast({
-      title: isSaved ? "Post unsaved" : "Post saved!",
-      description: isSaved ? "Removed from your bookmarks." : "You can find it in your bookmarks.",
-    });
+    const savedSlugs: string[] = JSON.parse(localStorage.getItem(SAVED_POSTS_KEY) || '[]');
+    const isCurrentlySaved = savedSlugs.includes(post.slug);
+    
+    let newSavedSlugs: string[];
+
+    if (isCurrentlySaved) {
+      newSavedSlugs = savedSlugs.filter(slug => slug !== post.slug);
+      toast({
+        title: "Post unsaved",
+        description: "Removed from your saved blogs.",
+      });
+    } else {
+      newSavedSlugs = [...savedSlugs, post.slug];
+      toast({
+        title: "Post saved!",
+        description: "You can find it on your Saved Blogs page.",
+      });
+    }
+
+    localStorage.setItem(SAVED_POSTS_KEY, JSON.stringify(newSavedSlugs));
+    setIsSaved(!isCurrentlySaved);
   };
 
   const handleReport = () => {

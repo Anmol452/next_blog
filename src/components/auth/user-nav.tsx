@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { CircleDollarSign, LogOut, UserCircle } from "lucide-react";
+import { CircleDollarSign, LogOut, UserCircle, Bookmark } from "lucide-react";
 import Link from "next/link";
 import { logout } from "./actions";
 
@@ -46,6 +46,12 @@ export function UserNav() {
             <Link href="/profile">
               <UserCircle className="mr-2 h-4 w-4" />
               <span>Profile</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/saved-blogs">
+              <Bookmark className="mr-2 h-4 w-4" />
+              <span>Saved Blogs</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>

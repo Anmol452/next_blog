@@ -12,5 +12,5 @@ export function middleware(request: NextRequest) {
 }
  
 export const config = {
-  matcher: ['/upload/:path*', '/my-blogs/:path*', '/funds/:path*', '/profile/:path*', '/withdraw/:path*'],
+  matcher: ['/upload/:path*', '/my-blogs/:path*', '/funds/:path*', '/profile/:path*', '/withdraw/:path*', '/saved-blogs/:path*'],
 }
