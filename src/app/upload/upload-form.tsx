@@ -39,7 +39,7 @@ interface UploadFormProps {
   post?: UploadFormValues;
 }
 
-const categories = ["Technology", "Web Development", "Design", "SEO", "Productivity", "Lifestyle"];
+const categories = ["Stock Market", "IT", "Jobs", "News", "Lifestyle", "Food", "Travel", "Personal Finance", "Health & Fitness", "Technology", "Education", "Parenting"];
 
 export function UploadForm({ post }: UploadFormProps) {
   const [titleCharCount, setTitleCharCount] = useState(post?.title.length || 0);
