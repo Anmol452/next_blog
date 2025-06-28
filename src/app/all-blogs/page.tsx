@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,14 +13,19 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { getAllBlogPosts, type AppBlogPost } from "@/lib/services/blog-service";
-import { Search } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 
 export default function AllBlogsPage() {
   const [blogPosts, setBlogPosts] = useState<AppBlogPost[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,6 +44,41 @@ export default function AllBlogsPage() {
         post.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
+  const handleScroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+        const scrollAmount = direction === 'left' ? -200 : 200;
+        scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const checkArrows = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      checkArrows();
+      scrollContainer.addEventListener('scroll', checkArrows);
+      window.addEventListener('resize', checkArrows);
+
+      const observer = new MutationObserver(checkArrows);
+      observer.observe(scrollContainer, { childList: true, subtree: true });
+
+      return () => {
+        if(scrollContainer) {
+            scrollContainer.removeEventListener('scroll', checkArrows);
+        }
+        window.removeEventListener('resize', checkArrows);
+        observer.disconnect();
+      };
+    }
+  }, [categories]);
+
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center">
@@ -50,23 +90,52 @@ export default function AllBlogsPage() {
         </p>
       </div>
 
-      <div className="my-8">
-        <ScrollArea className="w-full whitespace-nowrap">
-          <div className="flex w-max space-x-2 pb-4">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className="whitespace-nowrap"
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+      <div className="my-8 flex items-center justify-center gap-x-1">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => handleScroll('left')}
+          className={cn("h-10 w-10 shrink-0 rounded-full", !showLeftArrow && "invisible")}
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </Button>
+
+        <div className="w-full max-w-4xl overflow-hidden">
+             <div
+                ref={scrollRef}
+                className="flex items-center space-x-2 overflow-x-auto pb-2"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+             >
+                 {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    onClick={() => setSelectedCategory(category)}
+                    className="whitespace-nowrap"
+                  >
+                    {category}
+                  </Button>
+                ))}
+                <style jsx>{`
+                    .overflow-x-auto::-webkit-scrollbar {
+                        display: none;
+                    }
+                `}</style>
+             </div>
+        </div>
+       
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => handleScroll('right')}
+          className={cn("h-10 w-10 shrink-0 rounded-full", !showRightArrow && "invisible")}
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </Button>
       </div>
+
 
       <div className="mb-12 max-w-lg mx-auto">
         <div className="relative">
