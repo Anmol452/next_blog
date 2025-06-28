@@ -12,7 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CommentsSection } from "@/components/comments-section";
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getBlogPostBySlug(params.slug);
@@ -124,17 +123,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
           <div className="my-8 h-40 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground">
               [ Google Ad Placeholder ]
-          </div>
-
-          <CommentsSection />
-
-          <div className="mt-12">
-            <h3 className="text-lg font-semibold text-center text-muted-foreground mb-4">Sponsored Content</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="h-60 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground">[ Google Ad Placeholder ]</div>
-              <div className="h-60 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground">[ Google Ad Placeholder ]</div>
-              <div className="h-60 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground">[ Google Ad Placeholder ]</div>
-            </div>
           </div>
         </article>
       </div>
