@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { getAllBlogPosts, type AppBlogPost } from "@/lib/services/blog-service";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export default function AllBlogsPage() {
   const [blogPosts, setBlogPosts] = useState<AppBlogPost[]>([]);
@@ -49,16 +50,22 @@ export default function AllBlogsPage() {
         </p>
       </div>
 
-      <div className="flex justify-center flex-wrap gap-2 my-8">
-        {categories.map((category) => (
-          <Button
-            key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </Button>
-        ))}
+      <div className="my-8">
+        <ScrollArea className="w-full whitespace-nowrap">
+          <div className="flex w-max space-x-2 pb-4">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category)}
+                className="whitespace-nowrap"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
 
       <div className="mb-12 max-w-lg mx-auto">
