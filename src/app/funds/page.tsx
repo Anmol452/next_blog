@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { CircleDollarSign } from "lucide-react";
+import Link from "next/link";
 
 const revenueData = [
   { month: "October 2023", views: "10,500", revenue: "$42.00", status: "Paid" },
@@ -33,7 +34,9 @@ export default function FundsPage() {
               <p className="text-4xl font-bold">$141.60</p>
             </div>
             <div className="ml-auto">
-              <Button>Withdraw Funds</Button>
+              <Button asChild>
+                <Link href="/withdraw">Withdraw Funds</Link>
+              </Button>
             </div>
           </CardContent>
         </Card>
