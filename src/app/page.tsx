@@ -84,6 +84,15 @@ export default async function Home({ searchParams }: { searchParams?: { welcome?
           ))}
         </div>
       </section>
+
+       <div className="mt-12">
+        <h3 className="text-center text-muted-foreground font-semibold mb-4">Sponsored Content</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="h-60 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground">[ Google Ad Placeholder ]</div>
+          <div className="h-60 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground">[ Google Ad Placeholder ]</div>
+          <div className="h-60 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground">[ Google Ad Placeholder ]</div>
+        </div>
+      </div>
     </div>
   );
 }
