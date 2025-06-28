@@ -7,9 +7,12 @@ import { FollowButton } from "@/components/follow-button";
 import { Eye, Users } from "lucide-react";
 import { CommentsSection } from "@/components/comments-section";
 import { BlogActionsMenu } from "@/components/blog-actions-menu";
+import { cookies } from "next/headers";
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getBlogPostBySlug(params.slug);
+  const authToken = cookies().get('auth-token')?.value;
+  const isAuthenticated = !!authToken;
 
   if (!post) {
     notFound();
@@ -26,7 +29,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <Eye className="h-5 w-5" />
                 <span>{post.views.toLocaleString()} views</span>
               </div>
-              <BlogActionsMenu post={{ title: post.title, slug: post.slug }} />
+              <BlogActionsMenu 
+                post={{ title: post.title, slug: post.slug }}
+                isAuthenticated={isAuthenticated}
+              />
             </div>
           </div>
 
