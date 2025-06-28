@@ -1,4 +1,3 @@
-import type { ObjectId } from 'mongodb';
 
 export type Subsection = {
   title: string;
@@ -7,7 +6,7 @@ export type Subsection = {
 };
 
 export type BlogPost = {
-  _id?: ObjectId;
+  id: string | number;
   slug: string;
   title: string;
   description: string;

@@ -1,7 +1,6 @@
 'use server';
 
 import { blogPosts as mockBlogPosts } from '@/lib/mock-data';
-import type { Subsection } from '@/lib/definitions';
 
 // This is our application-facing type, where id is a string.
 // It matches the structure of the mock data but with a string id
