@@ -4,15 +4,9 @@ import { getBlogPostBySlug } from "@/lib/services/blog-service";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { FollowButton } from "@/components/follow-button";
-import { Eye, Users, MoreVertical, Bookmark, Flag, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Eye, Users } from "lucide-react";
 import { CommentsSection } from "@/components/comments-section";
+import { BlogActionsMenu } from "@/components/blog-actions-menu";
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getBlogPostBySlug(params.slug);
@@ -26,28 +20,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <div className="relative">
         <aside className="hidden md:block absolute top-8 -left-24 h-full">
           <div className="sticky top-24">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full">
-                  <MoreVertical className="h-5 w-5 text-muted-foreground" />
-                  <span className="sr-only">More options</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                <DropdownMenuItem>
-                  <Bookmark className="mr-2 h-4 w-4" />
-                  <span>Save</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Flag className="mr-2 h-4 w-4" />
-                  <span>Report</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Share2 className="mr-2 h-4 w-4" />
-                  <span>Share</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <BlogActionsMenu post={{ title: post.title, slug: post.slug }} />
           </div>
         </aside>
 
