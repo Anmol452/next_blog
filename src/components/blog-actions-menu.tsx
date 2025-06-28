@@ -17,10 +17,9 @@ interface BlogActionsMenuProps {
     title: string;
     slug: string;
   };
-  isAuthenticated: boolean;
 }
 
-export function BlogActionsMenu({ post, isAuthenticated }: BlogActionsMenuProps) {
+export function BlogActionsMenu({ post }: BlogActionsMenuProps) {
   const [isSaved, setIsSaved] = useState(false);
   const { toast } = useToast();
 
@@ -74,23 +73,19 @@ export function BlogActionsMenu({ post, isAuthenticated }: BlogActionsMenuProps)
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {isAuthenticated && (
-          <>
-            <DropdownMenuItem onSelect={handleSave}>
-              {isSaved ? (
-                <BookmarkCheck className="mr-2 h-4 w-4" />
-              ) : (
-                <Bookmark className="mr-2 h-4 w-4" />
-              )}
-              <span>{isSaved ? "Saved" : "Save"}</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={handleReport}>
-              <Flag className="mr-2 h-4 w-4" />
-              <span>Report</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-          </>
-        )}
+        <DropdownMenuItem onSelect={handleSave}>
+          {isSaved ? (
+            <BookmarkCheck className="mr-2 h-4 w-4" />
+          ) : (
+            <Bookmark className="mr-2 h-4 w-4" />
+          )}
+          <span>{isSaved ? "Saved" : "Save"}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={handleReport}>
+          <Flag className="mr-2 h-4 w-4" />
+          <span>Report</span>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem onSelect={handleShare}>
           <Share2 className="mr-2 h-4 w-4" />
           <span>Share</span>
