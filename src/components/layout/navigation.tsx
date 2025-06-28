@@ -3,14 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Home, LayoutGrid, User, Upload, Mail, Bookmark, CircleDollarSign } from 'lucide-react';
+import { Home, LayoutGrid, User, Upload, Mail } from 'lucide-react';
 
 const allLinks = [
   { href: '/', label: 'Home', icon: Home, auth: false },
   { href: '/all-blogs', label: 'All Blogs', icon: LayoutGrid, auth: false },
   { href: '/my-blogs', label: 'My Blogs', icon: User, auth: true },
-  { href: '/funds', label: 'Funds', icon: CircleDollarSign, auth: true },
-  { href: '/saved-blogs', label: 'Saved Blogs', icon: Bookmark, auth: true },
   { href: '/upload', label: 'Upload Blog', icon: Upload, auth: true },
   { href: '/contact', label: 'Contact Us', icon: Mail, auth: false },
 ];
