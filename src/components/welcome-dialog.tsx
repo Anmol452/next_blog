@@ -58,9 +58,9 @@ export function WelcomeDialog({ show }: WelcomeDialogProps) {
             Before you start, please review these key terms.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex-1 relative">
+        <div className="flex-1 relative min-h-0">
           <ScrollArea className="absolute inset-0 h-full">
-            <div className="space-y-4 py-4 pr-4">
+            <div className="space-y-4 py-4 pr-6">
               <div className="flex items-start gap-4">
                 <Hand className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                 <div>
