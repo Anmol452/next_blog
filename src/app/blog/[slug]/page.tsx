@@ -24,7 +24,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </div>
         </aside>
 
-        <article className="max-w-4xl mx-auto">
+        <article className="max-w-5xl mx-auto">
           <header className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <Badge variant="secondary">{post.category}</Badge>

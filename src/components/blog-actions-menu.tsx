@@ -64,31 +64,33 @@ export function BlogActionsMenu({ post }: BlogActionsMenuProps) {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full">
-          <MoreVertical className="h-5 w-5 text-muted-foreground" />
-          <span className="sr-only">More options</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
-        <DropdownMenuItem onSelect={handleSave}>
-          {isSaved ? (
-            <BookmarkCheck className="mr-2 h-4 w-4" />
-          ) : (
-            <Bookmark className="mr-2 h-4 w-4" />
-          )}
-          <span>{isSaved ? "Saved" : "Save"}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={handleReport}>
-          <Flag className="mr-2 h-4 w-4" />
-          <span>Report</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={handleShare}>
-          <Share2 className="mr-2 h-4 w-4" />
-          <span>Share</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="border bg-card rounded-lg p-1 shadow-sm">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon" className="h-10 w-10">
+            <MoreVertical className="h-5 w-5 text-muted-foreground" />
+            <span className="sr-only">More options</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          <DropdownMenuItem onSelect={handleSave}>
+            {isSaved ? (
+              <BookmarkCheck className="mr-2 h-4 w-4" />
+            ) : (
+              <Bookmark className="mr-2 h-4 w-4" />
+            )}
+            <span>{isSaved ? "Saved" : "Save"}</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={handleReport}>
+            <Flag className="mr-2 h-4 w-4" />
+            <span>Report</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={handleShare}>
+            <Share2 className="mr-2 h-4 w-4" />
+            <span>Share</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }
