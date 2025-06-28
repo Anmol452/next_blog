@@ -80,7 +80,7 @@ export default function SignupPage() {
           </CardTitle>
           <CardDescription className="text-center">
             {step === 1
-              ? "Join BlogNest to start writing and earning today."
+              ? "Join Blagnager to start writing and earning today."
               : "We've sent a code to your email. Please enter it below."}
           </CardDescription>
         </CardHeader>

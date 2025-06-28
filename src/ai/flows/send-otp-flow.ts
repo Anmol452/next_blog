@@ -30,7 +30,7 @@ const sendOtpPrompt = ai.definePrompt({
   input: {schema: z.object({ email: z.string(), otp: z.string() })},
   output: {schema: z.object({ message: z.string() })},
   prompt: `You are an authentication system. A user with email {{{email}}} has requested an OTP. The code is {{{otp}}}.
-      Craft a simple, friendly message confirming that the OTP has been sent. Mention that it's for signing up to BlogNest.`,
+      Craft a simple, friendly message confirming that the OTP has been sent. Mention that it's for signing up to Blagnager.`,
 });
 
 const sendOtpFlow = ai.defineFlow(

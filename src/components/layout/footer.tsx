@@ -13,7 +13,7 @@ export function Footer() {
     <footer className="border-t">
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} BlogNest. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Blagnager. All rights reserved.</p>
           <ul className="flex flex-wrap items-center gap-4 sm:text-sm">
             {footerNavs.map((item) => (
               <li key={item.name} className="text-muted-foreground hover:text-foreground transition-colors">

@@ -11,7 +11,7 @@ export default function PrivacyPage() {
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <h2>1. Introduction</h2>
           <p>
-            Welcome to BlogNest. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.
+            Welcome to Blagnager. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.
           </p>
           <h2>2. Information We Collect</h2>
           <p>

@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'BlogNest',
+  title: 'Blognager',
   description: 'Post blogs for free and earn money',
 };
 

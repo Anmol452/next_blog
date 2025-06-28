@@ -48,7 +48,7 @@ export default function LoginPage() {
           <div className="flex justify-center mb-4">
             <Rss className="h-10 w-10 text-primary" />
           </div>
-          <CardTitle className="text-2xl text-center font-headline">Login to BlogNest</CardTitle>
+          <CardTitle className="text-2xl text-center font-headline">Login to Blagnager</CardTitle>
           <CardDescription className="text-center">
             Enter your email below to login to your account.
             <br />

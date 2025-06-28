@@ -17,7 +17,7 @@ export function Header() {
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Rss className="h-6 w-6 text-primary" />
             <span className="hidden font-bold sm:inline-block font-headline">
-              BlogNest
+              Blagnager
             </span>
           </Link>
           <DesktopNav isAuthenticated={isAuthenticated} />
@@ -40,7 +40,7 @@ export function Header() {
               className="flex items-center"
             >
               <Rss className="mr-2 h-5 w-5 text-primary" />
-              <span className="font-bold font-headline">BlogNest</span>
+              <span className="font-bold font-headline">Blagnager</span>
             </Link>
             <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
               <MobileNav isAuthenticated={isAuthenticated} />

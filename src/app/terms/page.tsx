@@ -19,7 +19,7 @@ export default function TermsPage() {
           </p>
           <h2>3. Monetization</h2>
           <p>
-            BlogNest integrates with third-party advertising services like Google AdSense to display ads on blog posts. By using our service, you agree that we may place such advertising on the service. The revenue generated from these ads will be shared between you and BlogNest according to the policy outlined on our Funds page. We are not responsible for the content of these ads or the practices of third-party advertisers.
+            Blagnager integrates with third-party advertising services like Google AdSense to display ads on blog posts. By using our service, you agree that we may place such advertising on the service. The revenue generated from these ads will be shared between you and Blagnager according to the policy outlined on our Funds page. We are not responsible for the content of these ads or the practices of third-party advertisers.
           </p>
           <h2>4. Prohibited Conduct</h2>
           <p>
@@ -27,7 +27,7 @@ export default function TermsPage() {
           </p>
           <h2>5. Termination</h2>
           <p>
-            We may terminate or suspend your account and bar access to the service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms.
+            We may terminate or suspend your account and bar access to the service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not to a breach of the Terms.
           </p>
         </div>
       </div>
