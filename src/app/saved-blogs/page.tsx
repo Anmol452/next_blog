@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAllBlogPosts, type AppBlogPost } from "@/lib/services/blog-service";
-import { Bookmark } from "lucide-react";
 
 const SAVED_POSTS_KEY = 'blagnager_saved_posts';
 
@@ -39,16 +38,6 @@ export default function SavedBlogsPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold font-headline tracking-tight sm:text-5xl flex items-center justify-center gap-4">
-            <Bookmark className="h-10 w-10 text-primary"/>
-            Saved Blogs
-        </h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Your collection of saved stories and articles.
-        </p>
-      </div>
-
       {isLoading ? (
         <div className="text-center text-muted-foreground">Loading your saved posts...</div>
       ) : savedPosts.length > 0 ? (

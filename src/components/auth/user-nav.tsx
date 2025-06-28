@@ -48,16 +48,16 @@ export function UserNav() {
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
+           <DropdownMenuItem asChild>
+             <Link href="/funds">
+              <CircleDollarSign className="mr-2 h-4 w-4" />
+              <span>Funds</span>
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/saved-blogs">
               <Bookmark className="mr-2 h-4 w-4" />
               <span>Saved Blogs</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-             <Link href="/funds">
-              <CircleDollarSign className="mr-2 h-4 w-4" />
-              <span>Funds</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
