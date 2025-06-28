@@ -58,9 +58,9 @@ export function WelcomeDialog({ show }: WelcomeDialogProps) {
             Before you start, please review these key terms.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex-1 relative min-h-0">
-          <ScrollArea className="absolute inset-0 h-full">
-            <div className="space-y-4 py-4 pr-6">
+
+        <ScrollArea className="flex-1 -mx-6">
+          <div className="space-y-4 py-4 px-6">
               <div className="flex items-start gap-4">
                 <Hand className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                 <div>
@@ -92,9 +92,9 @@ export function WelcomeDialog({ show }: WelcomeDialogProps) {
                 </div>
               </div>
             </div>
-          </ScrollArea>
-        </div>
-        <DialogFooter className="flex-col gap-4 pt-4 border-t sm:flex-col sm:space-x-0">
+        </ScrollArea>
+        
+        <DialogFooter className="pt-4 border-t">
           <div className="flex items-center space-x-2">
             <Checkbox id="terms" checked={isAgreed} onCheckedChange={(checked) => setIsAgreed(checked as boolean)} />
             <Label htmlFor="terms" className="text-sm font-normal">
