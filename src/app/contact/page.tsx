@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
@@ -50,23 +51,6 @@ export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-2xl mx-auto">
-        {state?.solution && (
-          <Card className="mb-8">
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="h-6 w-6 text-primary" />
-                    <span>AI Response</span>
-                </CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div 
-                    className="prose prose-sm dark:prose-invert max-w-none"
-                    dangerouslySetInnerHTML={{ __html: state.solution }}
-                />
-            </CardContent>
-          </Card>
-        )}
-
         <Card>
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
@@ -77,7 +61,24 @@ export default function ContactPage() {
               Have a problem or a question about CloudBloging? Describe it below, and our AI assistant will do its best to help you.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-6">
+            {state?.solution && (
+              <Card className="bg-muted/50">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                        <Sparkles className="h-5 w-5 text-primary" />
+                        <span>AI Response</span>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div 
+                        className="prose prose-sm dark:prose-invert max-w-none"
+                        dangerouslySetInnerHTML={{ __html: state.solution }}
+                    />
+                </CardContent>
+              </Card>
+            )}
+
             <form ref={formRef} action={formAction} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="problem" className="sr-only">Your Problem</Label>
