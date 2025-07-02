@@ -13,7 +13,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAllBlogPosts, type AppBlogPost } from "@/lib/services/blog-service";
 
-const SAVED_POSTS_KEY = 'blagnager_saved_posts';
+const SAVED_POSTS_KEY = 'cloudbloging_saved_posts';
 
 export default function SavedBlogsPage() {
   const [savedPosts, setSavedPosts] = useState<AppBlogPost[]>([]);

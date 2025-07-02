@@ -57,7 +57,7 @@ export default function ContactPage() {
             </div>
             <CardTitle className="text-3xl font-headline">AI Support Assistant</CardTitle>
             <CardDescription>
-              Have a problem or a question about Blagnager? Describe it below, and our AI assistant will do its best to help you.
+              Have a problem or a question about CloudBloging? Describe it below, and our AI assistant will do its best to help you.
             </CardDescription>
           </CardHeader>
           <CardContent>

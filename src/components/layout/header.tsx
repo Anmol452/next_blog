@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Rss } from "lucide-react";
+import { Menu } from "lucide-react";
 import { UserNav } from "@/components/auth/user-nav";
 import { cookies } from "next/headers";
 import { DesktopNav, MobileNav } from "./navigation";
+import { LogoIcon } from "../logo-icon";
 
 export function Header() {
   const authToken = cookies().get('auth-token')?.value;
@@ -15,9 +16,9 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Rss className="h-6 w-6 text-primary" />
+            <LogoIcon />
             <span className="hidden font-bold sm:inline-block font-headline">
-              Blagnager
+              CloudBloging
             </span>
           </Link>
           <DesktopNav isAuthenticated={isAuthenticated} />
@@ -39,8 +40,8 @@ export function Header() {
               href="/"
               className="flex items-center"
             >
-              <Rss className="mr-2 h-5 w-5 text-primary" />
-              <span className="font-bold font-headline">Blagnager</span>
+              <LogoIcon className="mr-2" />
+              <span className="font-bold font-headline">CloudBloging</span>
             </Link>
             <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
               <MobileNav isAuthenticated={isAuthenticated} />

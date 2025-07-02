@@ -11,12 +11,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Rss, Mail, Loader2, Eye, EyeOff } from "lucide-react";
+import { Mail, Loader2, Eye, EyeOff } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useToast } from "@/hooks/use-toast";
 import { sendOtpAction, signupAction } from "./actions";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { LogoIcon } from "@/components/logo-icon";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -73,14 +74,14 @@ export default function SignupPage() {
       <Card className="mx-auto w-full max-w-sm">
         <CardHeader>
           <div className="flex justify-center mb-4">
-            <Rss className="h-10 w-10 text-primary" />
+            <LogoIcon className="h-12 w-12 text-primary" />
           </div>
           <CardTitle className="text-2xl text-center font-headline">
             {step === 1 ? "Create your Account" : "Verify your Email"}
           </CardTitle>
           <CardDescription className="text-center">
             {step === 1
-              ? "Join Blagnager to start writing and earning today."
+              ? "Join CloudBloging to start writing and earning today."
               : "We've sent a code to your email. Please enter it below."}
           </CardDescription>
         </CardHeader>

@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Rss, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { login } from "./actions";
 import { useFormState, useFormStatus } from "react-dom";
 import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { LogoIcon } from "@/components/logo-icon";
 
 function LoginButton() {
   const { pending } = useFormStatus();
@@ -46,9 +47,9 @@ export default function LoginPage() {
       <Card className="mx-auto w-full max-w-sm">
         <CardHeader>
           <div className="flex justify-center mb-4">
-            <Rss className="h-10 w-10 text-primary" />
+            <LogoIcon className="h-12 w-12 text-primary" />
           </div>
-          <CardTitle className="text-2xl text-center font-headline">Login to Blagnager</CardTitle>
+          <CardTitle className="text-2xl text-center font-headline">Login to CloudBloging</CardTitle>
           <CardDescription className="text-center">
             Enter your email below to login to your account.
             <br />

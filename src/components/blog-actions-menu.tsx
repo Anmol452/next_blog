@@ -19,7 +19,7 @@ interface BlogActionsMenuProps {
   };
 }
 
-const SAVED_POSTS_KEY = 'blagnager_saved_posts';
+const SAVED_POSTS_KEY = 'cloudbloging_saved_posts';
 
 export function BlogActionsMenu({ post }: BlogActionsMenuProps) {
   const [isSaved, setIsSaved] = useState(false);

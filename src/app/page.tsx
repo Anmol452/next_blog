@@ -19,7 +19,7 @@ export default async function Home({ searchParams }: { searchParams?: { welcome?
           Write, Share, <span className="text-primary">Earn.</span>
         </h1>
         <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
-          Welcome to Blagnager, the platform where your stories find a home and your voice finds its value. Start blogging for free and monetize your passion.
+          Welcome to CloudBloging, the platform where your stories find a home and your voice finds its value. Start blogging for free and monetize your passion.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Button asChild size="lg">

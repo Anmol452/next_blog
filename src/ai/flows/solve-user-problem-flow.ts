@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview An AI flow to help users with their problems on the Blagnager platform.
+ * @fileOverview An AI flow to help users with their problems on the CloudBloging platform.
  *
  * - solveUserProblem - A function that takes a user's problem and returns a solution.
  * - SolveUserProblemInput - The input type for the solveUserProblem function.
@@ -28,7 +28,7 @@ const prompt = ai.definePrompt({
   name: 'solveUserProblemPrompt',
   input: {schema: SolveUserProblemInputSchema},
   output: {schema: SolveUserProblemOutputSchema},
-  prompt: `You are an expert AI support assistant for a blogging platform called "Blagnager".
+  prompt: `You are an expert AI support assistant for a blogging platform called "CloudBloging".
 Your goal is to provide clear, concise, and friendly solutions to user problems.
 Be empathetic and guide the user step-by-step if necessary.
 

@@ -21,7 +21,7 @@ interface WelcomeDialogProps {
   show: boolean;
 }
 
-const WELCOME_KEY = 'blagnager_welcome_accepted';
+const WELCOME_KEY = 'cloudbloging_welcome_accepted';
 
 export function WelcomeDialog({ show }: WelcomeDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +53,7 @@ export function WelcomeDialog({ show }: WelcomeDialogProps) {
     }}>
       <DialogContent className="sm:max-w-md flex flex-col max-h-[90dvh]" onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-headline">Welcome to Blagnager!</DialogTitle>
+          <DialogTitle className="text-2xl font-headline">Welcome to CloudBloging!</DialogTitle>
           <DialogDescription>
             Before you start, please review these key terms.
           </DialogDescription>
@@ -98,7 +98,7 @@ export function WelcomeDialog({ show }: WelcomeDialogProps) {
         
         <DialogFooter className="pt-4 border-t flex-col-reverse sm:flex-col-reverse gap-2 w-full">
           <Button type="button" onClick={handleContinue} disabled={!isAgreed} className="w-full">
-            Continue to Blagnager
+            Continue to CloudBloging
           </Button>
           <div className="flex items-center space-x-2">
             <Checkbox id="terms" checked={isAgreed} onCheckedChange={(checked) => setIsAgreed(checked as boolean)} />
