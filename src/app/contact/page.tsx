@@ -115,6 +115,14 @@ export default function ContactPage() {
     }
   }, [state, toast]);
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      // Use requestSubmit for better accessibility and event handling
+      formRef.current?.requestSubmit();
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-2xl mx-auto">
@@ -134,7 +142,14 @@ export default function ContactPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="problem" className="sr-only">Your Problem</Label>
-                <Textarea id="problem" name="problem" placeholder="e.g., How do I change my password?" className="min-h-[150px]" required />
+                <Textarea 
+                  id="problem" 
+                  name="problem" 
+                  placeholder="e.g., How do I change my password?" 
+                  className="min-h-[150px]" 
+                  required 
+                  onKeyDown={handleKeyDown}
+                />
               </div>
               <SubmitButton />
             </form>
