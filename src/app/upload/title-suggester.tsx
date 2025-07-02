@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -25,9 +25,11 @@ export function TitleSuggester({ description, onSelectTitle }: TitleSuggesterPro
   const [error, setError] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleGetSuggestions = async () => {
-    if (!description.trim()) {
-      setError('Please write a description first to get title suggestions.');
+  const getSuggestions = useCallback(async () => {
+    // Check for a minimum length for better suggestions
+    if (!description.trim() || description.trim().length < 10) {
+      setError('Please write a description of at least 10 characters to get title suggestions.');
+      setIsLoading(false);
       return;
     }
 
@@ -45,22 +47,38 @@ export function TitleSuggester({ description, onSelectTitle }: TitleSuggesterPro
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [description]);
+
+  useEffect(() => {
+    if (isOpen) {
+      getSuggestions();
+    }
+  }, [isOpen, getSuggestions]);
 
   const handleSelect = (title: string) => {
     onSelectTitle(title);
     setIsOpen(false);
   };
+  
+  const handleOpenChange = (open: boolean) => {
+    if (open) {
+      // Reset state when opening the dialog
+      setError(null);
+      setSuggestions([]);
+      setIsLoading(true);
+    }
+    setIsOpen(open);
+  };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" type="button">
           <Sparkles className="mr-2 h-4 w-4" />
           Suggest Titles
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px]" onOpenAutoFocus={handleGetSuggestions}>
+      <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>AI-Powered Title Suggestions</DialogTitle>
           <DialogDescription>
@@ -95,7 +113,7 @@ export function TitleSuggester({ description, onSelectTitle }: TitleSuggesterPro
             </div>
           )}
            {!isLoading && !error && suggestions.length === 0 && (
-             <div className="text-center text-muted-foreground py-10">No suggestions available.</div>
+             <div className="text-center text-muted-foreground py-10">No suggestions available. Try refining your description.</div>
            )}
         </div>
       </DialogContent>
