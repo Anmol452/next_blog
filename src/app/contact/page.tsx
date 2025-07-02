@@ -50,6 +50,22 @@ export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-2xl mx-auto">
+        {state?.solution && (
+          <Card className="mb-8">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="h-6 w-6 text-primary" />
+                    <span>AI Response</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
+                  {state.solution}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         <Card>
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
@@ -70,22 +86,6 @@ export default function ContactPage() {
             </form>
           </CardContent>
         </Card>
-
-        {state?.solution && (
-          <Card className="mt-8">
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="h-6 w-6 text-primary" />
-                    <span>AI Response</span>
-                </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                  {state.solution}
-              </div>
-            </CardContent>
-          </Card>
-        )}
       </div>
     </div>
   );
