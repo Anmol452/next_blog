@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +18,16 @@ import {
 
 export default function ProfilePage() {
     const [myPosts, setMyPosts] = useState<AppBlogPost[]>([]);
+    const [profileImage, setProfileImage] = useState("https://placehold.co/100x100.png");
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file && file.type.startsWith("image/")) {
+            const newImageUrl = URL.createObjectURL(file);
+            setProfileImage(newImageUrl);
+        }
+    };
 
     useEffect(() => {
       const fetchPosts = async () => {
@@ -26,6 +36,16 @@ export default function ProfilePage() {
       };
       fetchPosts();
     }, []);
+
+    // Effect to clean up the object URL to prevent memory leaks
+    useEffect(() => {
+      const currentUrl = profileImage;
+      return () => {
+        if (currentUrl.startsWith("blob:")) {
+          URL.revokeObjectURL(currentUrl);
+        }
+      };
+    }, [profileImage]);
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -38,16 +58,23 @@ export default function ProfilePage() {
              <Dialog>
               <DialogTrigger asChild>
                 <Avatar className="h-24 w-24 mb-4 cursor-pointer transition-transform hover:scale-110">
-                  <AvatarImage src="https://placehold.co/100x100.png" alt="User" data-ai-hint="user avatar" />
+                  <AvatarImage src={profileImage} alt="User" data-ai-hint="user avatar" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
               </DialogTrigger>
               <DialogContent className="p-0 bg-transparent border-0 w-auto flex justify-center">
-                <Image src="https://placehold.co/400x400.png" alt="User" width={400} height={400} className="rounded-full" data-ai-hint="user avatar" />
+                <Image src={profileImage.includes('placehold.co') ? 'https://placehold.co/400x400.png' : profileImage} alt="User" width={400} height={400} className="rounded-full" data-ai-hint="user avatar" />
               </DialogContent>
             </Dialog>
 
-            <Button variant="outline" size="sm">Change Photo</Button>
+            <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept="image/*"
+                onChange={handleImageChange}
+            />
+            <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>Change Photo</Button>
             <CardTitle className="mt-4">Jane Doe</CardTitle>
             <CardDescription>Joined on {new Date().toLocaleDateString()}</CardDescription>
           </CardHeader>
