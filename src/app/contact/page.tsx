@@ -59,9 +59,10 @@ export default function ContactPage() {
                 </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                  {state.solution}
-              </div>
+                <div 
+                    className="prose prose-sm dark:prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{ __html: state.solution }}
+                />
             </CardContent>
           </Card>
         )}

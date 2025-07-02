@@ -16,7 +16,7 @@ const SolveUserProblemInputSchema = z.object({
 export type SolveUserProblemInput = z.infer<typeof SolveUserProblemInputSchema>;
 
 const SolveUserProblemOutputSchema = z.object({
-  solution: z.string().describe('A helpful and friendly solution to the user problem.'),
+  solution: z.string().describe('A helpful and friendly solution to the user problem, formatted in simple HTML using tags like <p>, <strong>, and <ol> with <li> for lists.'),
 });
 export type SolveUserProblemOutput = z.infer<typeof SolveUserProblemOutputSchema>;
 
@@ -31,6 +31,8 @@ const prompt = ai.definePrompt({
   prompt: `You are an expert AI support assistant for a blogging platform called "CloudBloging".
 Your goal is to provide clear, concise, and friendly solutions to user problems.
 Be empathetic and guide the user step-by-step if necessary.
+
+Format your response using simple HTML tags. Use <strong> for bolding, and <ol> with <li> for numbered lists. Do not use markdown.
 
 User's problem: {{{problem}}}
 
